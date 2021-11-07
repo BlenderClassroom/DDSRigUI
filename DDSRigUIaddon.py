@@ -1,12 +1,13 @@
 bl_info = {
     "name": "DDS Rigging UI",
     "author": "Dwayne Savage",
-    "version": (1, 0),
+    "version": (1, 1),
     "blender": (2, 80, 0),
     "location": "3D View->Properties Region",
     "description": "Rigging UI.",
     "warning": "",
     "wiki_url": "https://blenderclassroom.com",
+    "doc_url": "https://blenderclassroom.com",
     "category": "3D View",
     }
 
@@ -39,12 +40,15 @@ class DDSRigUI(bpy.types.Panel):
         row.prop(context.active_object, "show_in_front", toggle=True, text="In Front")
         if hasattr(od, "axes_position"):
             row.prop(od, "show_group_colors", toggle=True, text="Color")
+            row.prop(od, "show_names", toggle=True, text="Name")
             row = col.row(align=True)
             row.prop(od, "show_axes", toggle=True, text="Axis")
             row.prop(od, "axes_position", toggle=True, text="")
         else:
-            row.prop(od, "show_axes", toggle=True, text="Axis")
             row.prop(od, "show_group_colors", toggle=True, text="Color")
+            row = col.row(align=True)
+            row.prop(od, "show_axes", toggle=True, text="Axis")
+            row.prop(od, "show_names", toggle=True, text="Name")
     #hidden            
         row = col.row(align=True)
         row.separator(factor=0.5)
@@ -52,7 +56,6 @@ class DDSRigUI(bpy.types.Panel):
         row.prop(od, "layers", text="")
         row = col.row(align=True)        
         row.prop(od, "layers", toggle=True, index=31, text="Deform")
-        row = col.row(align=True)
         row.prop(od, "layers", toggle=True, index=30, text="Mechanism")
         row = col.row(align=True)
         row.prop(od, "layers", toggle=True, index=15, text="Motion Capture")
